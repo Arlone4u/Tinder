@@ -97,7 +97,7 @@ class _ExplorePageState extends State<ExplorePage>
                           child: Row(
                             children: [
                               Flexible(
-                                flex: 3,
+                                flex: 5,
                                 child: Container(
                                   width: size.width * 0.72,
                                   child: Column(

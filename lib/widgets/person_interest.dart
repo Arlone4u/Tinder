@@ -13,13 +13,10 @@ class PersonInterest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: List.generate(
-          itemsTemp.length,
-          (indexLikes) {
+      children: List.generate(itemsTemp.length, (indexLikes) {
         return Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: 10),
-          margin: EdgeInsets.only(right: 10),
+          padding: EdgeInsets.symmetric(horizontal: 2),
+          margin: EdgeInsets.only(right: 0),
           height: 20,
           decoration: BoxDecoration(
             border: indexLikes == 0
@@ -28,8 +25,7 @@ class PersonInterest extends StatelessWidget {
                     width: 2,
                   )
                 : null,
-            borderRadius:
-                BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(30),
             color: indexLikes == 0
                 ? white.withOpacity(0.4)
                 : white.withOpacity(0.2),
