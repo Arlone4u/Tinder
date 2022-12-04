@@ -4,6 +4,10 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:tinder_clone/data/explore_json.dart';
 import 'package:tinder_clone/data/icons.dart';
 import 'package:tinder_clone/theme/colors.dart';
+import 'package:tinder_clone/widgets/person_info.dart';
+
+import '../widgets/person_interest.dart';
+import '../widgets/person_status.dart';
 
 class ExplorePage extends StatefulWidget {
   @override
@@ -66,21 +70,24 @@ class _ExplorePageState extends State<ExplorePage>
                     height: size.height,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage(itemsTemp[index]['img']),
-                          fit: BoxFit.cover),
+                        image: AssetImage(itemsTemp[index]['img']),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Container(
                     width: size.width,
                     height: size.height,
                     decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [
+                      gradient: LinearGradient(
+                        colors: [
                           black.withOpacity(0.25),
                           black.withOpacity(0),
                         ],
-                            end: Alignment.topCenter,
-                            begin: Alignment.bottomCenter)),
+                        end: Alignment.topCenter,
+                        begin: Alignment.bottomCenter,
+                      ),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,128 +97,26 @@ class _ExplorePageState extends State<ExplorePage>
                           child: Row(
                             children: [
                               Flexible(
+                                flex: 3,
                                 child: Container(
                                   width: size.width * 0.72,
                                   child: Column(
                                     children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            itemsTemp[index]['name'],
-                                            style: TextStyle(
-                                                color: white,
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            itemsTemp[index]['age'],
-                                            style: TextStyle(
-                                              color: white,
-                                              fontSize: 22,
-                                            ),
-                                          ),
-                                        ],
+                                      PersonInfo(
+                                        name: itemsTemp[index]['name'],
+                                        age: itemsTemp[index]['age'],
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 10,
-                                            height: 10,
-                                            decoration: BoxDecoration(
-                                                color: green,
-                                                shape: BoxShape.circle),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            "Recently Active",
-                                            style: TextStyle(
-                                              color: white,
-                                              fontSize: 16,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Row(
-                                        children: List.generate(
-                                            itemsTemp[index]['likes'].length,
-                                            (indexLikes) {
-                                          if (indexLikes == 0) {
-                                            return Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 8),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: white, width: 2),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                    color:
-                                                        white.withOpacity(0.4)),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 3,
-                                                          bottom: 3,
-                                                          left: 10,
-                                                          right: 10),
-                                                  child: Text(
-                                                    itemsTemp[index]['likes']
-                                                        [indexLikes],
-                                                    style:
-                                                        TextStyle(color: white),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          return Flexible(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 8),
-                                              child: Container(
-                                                width: 100,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                    color:
-                                                        white.withOpacity(0.2)),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 3,
-                                                          bottom: 3,
-                                                          left: 10,
-                                                          right: 10),
-                                                  child: Text(
-                                                    itemsTemp[index]['likes']
-                                                        [indexLikes],
-                                                    style:
-                                                        TextStyle(color: white),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        }),
-                                      )
+                                      SizedBox(height: 10),
+                                      PersonStatus(),
+                                      SizedBox(height: 15),
+                                      PersonInterest(
+                                          itemsTemp: itemsTemp[index]['likes'])
                                     ],
                                   ),
                                 ),
                               ),
-                              Expanded(
+                              Flexible(
+                                flex: 1,
                                 child: Container(
                                   width: size.width * 0.2,
                                   child: Center(
