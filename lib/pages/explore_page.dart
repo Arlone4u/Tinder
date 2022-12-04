@@ -4,6 +4,10 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:tinder_clone/data/explore_json.dart';
 import 'package:tinder_clone/data/icons.dart';
 import 'package:tinder_clone/theme/colors.dart';
+import 'package:tinder_clone/widgets/person_info.dart';
+
+import '../widgets/person_interest.dart';
+import '../widgets/person_status.dart';
 
 class ExplorePage extends StatefulWidget {
   @override
@@ -93,107 +97,37 @@ class _ExplorePageState extends State<ExplorePage>
                           child: Row(
                             children: [
                               Flexible(
+                                flex: 3,
                                 child: Container(
                                   width: size.width * 0.72,
                                   child: Column(
                                     children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            itemsTemp[index]['name'],
-                                            style: TextStyle(
-                                                color: white,
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            itemsTemp[index]['age'],
-                                            style: TextStyle(
-                                              color: white,
-                                              fontSize: 22,
-                                            ),
-                                          ),
-                                        ],
+                                      PersonInfo(
+                                        name: itemsTemp[index]['name'],
+                                        age: itemsTemp[index]['age'],
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 10,
-                                            height: 10,
-                                            decoration: BoxDecoration(
-                                              color: green,
-                                              shape: BoxShape.circle,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            "Recently Active",
-                                            style: TextStyle(
-                                              color: white,
-                                              fontSize: 16,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Row(
-                                        children: List.generate(
-                                            itemsTemp[index]['likes'].length,
-                                            (indexLikes) {
-                                          return Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            margin: EdgeInsets.only(right: 10),
-                                            height: 20,
-                                            decoration: BoxDecoration(
-                                              border: indexLikes == 0
-                                                  ? Border.all(
-                                                      color: white,
-                                                      width: 2,
-                                                    )
-                                                  : null,
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              color: indexLikes == 0
-                                                  ? white.withOpacity(0.4)
-                                                  : white.withOpacity(0.2),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                itemsTemp[index]['likes']
-                                                    [indexLikes],
-                                                style: TextStyle(color: white),
-                                              ),
-                                            ),
-                                          );
-                                        }),
-                                      )
+                                      SizedBox(height: 10),
+                                      PersonStatus(),
+                                      SizedBox(height: 15),
+                                      PersonInterest(
+                                          itemsTemp: itemsTemp[index]['likes'])
                                     ],
                                   ),
                                 ),
                               ),
-                              // Expanded(
-                              //   child: Container(
-                              //     width: size.width * 0.2,
-                              //     child: Center(
-                              //       child: Icon(
-                              //         Icons.info,
-                              //         color: white,
-                              //         size: 28,
-                              //       ),
-                              //     ),
-                              //   ),
-                              // )
+                              Flexible(
+                                flex: 1,
+                                child: Container(
+                                  width: size.width * 0.2,
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.info,
+                                      color: white,
+                                      size: 28,
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         )
