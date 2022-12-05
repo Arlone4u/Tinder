@@ -1,2 +1,2 @@
-# Tinder Clone App UI
+ Tinder Clone App UI
 
