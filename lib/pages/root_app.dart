@@ -44,6 +44,7 @@ class _RootPageState extends State<RootPage> {
           : "assets/images/account_icon.svg",
     ];
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       elevation: 0,
       title: Padding(
