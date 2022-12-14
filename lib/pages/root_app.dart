@@ -48,20 +48,23 @@ class _RootPageState extends State<RootPage> {
       elevation: 0,
       title: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(bottomItems.length, (index) {
-            return IconButton(
-              onPressed: () {
-                setState(() {
-                  pageIndex = index;
-                });
-              },
-              icon: SvgPicture.asset(
-                bottomItems[index],
-              ),
-            );
-          }),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(bottomItems.length, (index) {
+              return IconButton(
+                onPressed: () {
+                  setState(() {
+                    pageIndex = index;
+                  });
+                },
+                icon: SvgPicture.asset(
+                  bottomItems[index],
+                ),
+              );
+            }),
+          ),
         ),
       ),
     );

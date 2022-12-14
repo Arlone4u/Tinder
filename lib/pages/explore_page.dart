@@ -5,9 +5,11 @@ import 'package:tinder_clone/data/explore_json.dart';
 import 'package:tinder_clone/data/icons.dart';
 import 'package:tinder_clone/theme/colors.dart';
 import 'package:tinder_clone/widgets/person_info.dart';
+import 'package:tinder_clone/pages/match.dart';
 
 import '../widgets/person_interest.dart';
 import '../widgets/person_status.dart';
+import 'log_in.dart';
 
 class ExplorePage extends StatefulWidget {
   @override
@@ -47,6 +49,19 @@ class _ExplorePageState extends State<ExplorePage>
       child: Container(
         height: size.height,
         child: TinderSwapCard(
+          swipeCompleteCallback:
+              (CardSwipeOrientation orientation, int index) {
+            print(orientation.toString());
+            if (orientation == CardSwipeOrientation.LEFT) {
+              print("Card is LEFT swiping");
+
+            } else if (orientation == CardSwipeOrientation.RIGHT) {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Match()));
+
+            }
+          },
+
           totalNum: itemLength,
           maxWidth: MediaQuery.of(context).size.width,
           maxHeight: MediaQuery.of(context).size.height * 0.75,
@@ -148,14 +163,7 @@ class _ExplorePageState extends State<ExplorePage>
             }
             // print(itemsTemp.length);
           },
-          swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
-            /// Get orientation & index of swiped card!
-            if (index == (itemsTemp.length - 1)) {
-              setState(() {
-                itemLength = itemsTemp.length - 1;
-              });
-            }
-          },
+
         ),
       ),
     );
